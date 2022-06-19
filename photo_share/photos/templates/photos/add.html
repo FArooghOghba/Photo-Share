@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+
+<body class="m-5">
+    <h1>Add</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <a href="{% url 'photos:gallery' %}" class="btn btn-dark my-3">Go Back</a>
+                <div class="card">
+                <form method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-group m-3">
+                        <label for="inputCategory" class="form-label">Category</label>
+                        <select id="inputCategory" class="form-select" name="category">
+                          <option selected value="none">Choose...</option>
+                          {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+
+                      <div class="form-group m-3">
+                        <label for="exampleFormControlText1" class="form-label">Create a new category</label>
+                        <input class="form-control" type="text" id="exampleFormControlText1" name="new-category">
+                      </div>
+
+                      <div class="form-group m-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                      </div>
+
+                      <div class="form-group m-3">
+                        <label for="formFile" class="form-label">Upload image</label>
+                        <input class="form-control" type="file" multiple id="formFile" name="uploaded-images">
+                      </div>
+
+                      <div class="form-group m-3">
+                        <button type="submit" class="btn btn-primary">Add Photo</button>
+                      </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
